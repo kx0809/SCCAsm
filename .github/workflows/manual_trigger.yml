@@ -1,0 +1,22 @@
+name: Manual Test Runner
+
+on:
+  workflow_dispatch:  # enables manual trigger from GitHub UI
+
+jobs:
+  manual_test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run manual WebdriverIO test
+        run: npx wdio run wdio.conf.js
